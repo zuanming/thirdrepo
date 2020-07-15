@@ -91,11 +91,6 @@ def show_update_profile(id):
 
 @app.route('/update/<id>', methods=['POST'])
 def process_update_profile(id):
-
-    client[DB_NAME].users.find_one({
-        '_id': ObjectId(id)
-    })
-
     dob = request.form.get('dob')
     dob = datetime.datetime.strptime(dob, "%Y-%m-%d")
     languages = []
@@ -127,6 +122,19 @@ def process_update_profile(id):
 
     return redirect(url_for('show_all'))
 
+@app.route('/delete/<id>')
+def show_confirm_delete(id):
+    selected_profile=client[DB_NAME].users.find_one({
+            '_id': ObjectId(id)
+        })
+    return render_template('confirm_delete.template.html',selected_profile=selected_profile)
+
+@app.route('/delete/<id>',methods=['POST'])
+def process_confirm_delete(id):
+    client[DB_NAME].users.remove({
+        '_id': ObjectId(id)
+    })
+    return redirect(url_for('show_all'))
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':

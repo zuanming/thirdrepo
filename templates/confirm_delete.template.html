@@ -1,0 +1,14 @@
+{%extends 'layout.template.html'%}
+
+{%block title%}Confirm Delete{%endblock%}
+
+{%block content%}
+<h2>Delete '{{selected_profile.first_name+' '+selected_profile.last_name}}'?</h2>
+<div class='alert alert-danger'>
+<h5><span>Warning!</span>This action cannot be undone.</h5>
+    <form method='POST'>
+        <input type='submit' value-'Confirm' class='btn btn-danger'/>
+        <a href='{{url_for('show_all')}}' class='btn btn-primary'>Cancel</a> 
+    </form>
+</div>
+{%endblock%}
