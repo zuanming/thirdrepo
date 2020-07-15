@@ -1,0 +1,35 @@
+{%extends 'layout.template.html' %}
+
+{%block title%}Show All Profiles{%endblock%}
+
+{%block content%}
+<h1>All Profiles</h1>
+    <table class='table'>
+        <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Thumbnail</th>
+            <th>Availability</th>
+            <th></th>
+        </tr>
+    {%for profile in all_profiles%}
+        <tr>
+            <td>{{profile.firstname+" "+profile.lastname}}</td>
+            <td>{{profile.gender}}</td>
+            <td></td>
+            <td>{%if profile.availability==true%}
+                    Available
+                {%else%}
+                    Not Available
+                {%endif%}
+            </td>
+            <td></td>
+        </tr>
+    {%endfor%}
+    </table>
+{%endblock%}
+
+
+{%block js%}
+
+{%endblock%}
