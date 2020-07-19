@@ -18,7 +18,7 @@
 
             <td>
                 <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
-                <a href='{{url_for('show_confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
+                <a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
             </td>
         </tr>
     {%endfor%}

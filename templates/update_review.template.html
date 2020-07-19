@@ -1,21 +1,21 @@
 {%extends 'layout.template.html'%}
 
-{%block title%}Update Review{%endblock%}
+{%block title%}Update Reviewgit{%endblock%}
 
 {%block content%}
 <form method='POST'>
-    <h1>Write a review for {{restaurant.restaurant_name}}</h1>
+    <h1>Edit review for {{restaurant.restaurant_name}}</h1>
     <div>
         <label>Name</label>
-        <input type='text' name='review_name' class='form-control'/>
+        <input type='text' name='review_name' class='form-control' value='{{review.review_name}}'/>
     </div>
     <div>
         <label>Choice of food</label>
-        <input type='text' name='review_food' class='form-control'/>
+        <input type='text' name='review_food' class='form-control'  value='{{review.review_food}}'/>
     </div>
     <div>
         <label>Review:</label>
-        <input type='text' name='review_text' class='form-control'/>
+        <input type='text' name='review_text' class='form-control' value='{{review.review_text}}'/>
     </div>
     <input type='submit' value='Submit'/>
 </form>

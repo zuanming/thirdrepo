@@ -14,7 +14,7 @@
     </div>
 </div>
 <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
-<a href='{{url_for('show_confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
+<a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
 <h3>Reviews</h3>
 <a href='{{url_for('create_review', id = restaurant._id)}}' class='btn btn-secondary'>New Review</a>
 
@@ -23,12 +23,17 @@
         <th>Name</th>
         <th>Dish Selected</th>
         <th>Review</th>
+        <th></th>
     </tr>
     {%for review in restaurant.reviews %}
     <tr>
         <th>{{review.review_name}}</th>
         <th>{{review.review_food}}</th>
         <th>{{review.review_text}}</th>
+        <th>
+            <a href='{{url_for('update_review', review_id=review._id)}}' class='btn btn-primary'>Edit</a>
+            <a href='{{url_for('confirm_delete_review', review_id=review._id)}}' class='btn btn-danger'>Delete</a>
+        </th>
     </tr>
     {%endfor%}
 

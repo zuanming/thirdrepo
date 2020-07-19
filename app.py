@@ -20,10 +20,10 @@ UPLOAD_PRESET = os.environ.get('UPLOAD_PRESET')
 DB_NAME = "food_reviews"
 
 # read in the SESSION_KEY variable from the operating system environment
-# SESSION_KEY = os.environ.get('SESSION_KEY')
+SESSION_KEY = os.environ.get('SESSION_KEY')
 
 # # set the session key
-# app.secret_key = SESSION_KEY
+app.secret_key = SESSION_KEY
 
 # START OF CODE
 
@@ -140,7 +140,7 @@ def process_update_restaurant(id):
 
 
 @app.route('/delete/<id>')
-def show_confirm_delete(id):
+def confirm_delete(id):
     selected_restaurant = client[DB_NAME].restaurants.find_one({
         '_id': ObjectId(id)
     })
@@ -168,6 +168,7 @@ def process_create_review(id):
     selected_restaurant = client[DB_NAME].restaurants.find_one({
         '_id': ObjectId(id)
     })
+    id = selected_restaurant['_id']
 
     review_name = request.form.get('review_name')
     review_food = request.form.get('review_food')
@@ -178,18 +179,84 @@ def process_create_review(id):
     }, {
         '$push': {
             'reviews': {
+                '_id': ObjectId(),
                 'review_name': review_name,
                 'review_food': review_food,
                 'review_text': review_text,
             }
         }
     })
-    return render_template('show_restaurant.template.html', restaurant=selected_restaurant)
+    flash("Review added!")
+    return redirect(url_for('show_restaurant', restaurant=selected_restaurant, id=id))
 
-    @app.route('/<id>/review/<review_id>')
+
+@app.route('/review/update/<review_id>')
+def update_review(review_id):
+    selected_restaurant = client[DB_NAME].restaurants.find_one({
+        'reviews._id': ObjectId(review_id)
+    })
+
+    all_reviews = client[DB_NAME].restaurants.find_one({
+        'reviews._id': ObjectId(review_id)
+    }, {
+        'reviews': {
+            '$elemMatch': {
+                '_id': ObjectId(review_id)
+            }
+        }
+    })
+    selected_review = all_reviews['reviews'][0]
+    return render_template('update_review.template.html', restaurant=selected_restaurant, review=selected_review)
 
 
-    # "magic code" -- boilerplate
+@app.route('/review/update/<review_id>', methods=['POST'])
+def process_update_review(review_id):
+    selected_restaurant = client[DB_NAME].restaurants.find_one({
+        'reviews._id': ObjectId(review_id)
+    })
+    id=selected_restaurant['_id']
+    review_name = request.form.get('review_name')
+    review_food = request.form.get('review_food')
+    review_text = request.form.get('review_text')
+    client[DB_NAME].restaurants.update_one({
+        'reviews._id': ObjectId(review_id)
+    }, {
+        '$set': {
+            'reviews.$.review_name': review_name,
+            'reviews.$.review_food': review_food,
+            'reviews.$.review_text': review_text,
+        }
+    })
+    return redirect(url_for('show_restaurant', id=id))
+
+@app.route('/delete/review/<review_id>')
+def confirm_delete_review(review_id):
+    selected_restaurant = client[DB_NAME].restaurants.find_one({
+        'reviews._id': ObjectId(review_id)
+    })
+    id=selected_restaurant['_id']
+    return render_template('confirm_delete_review.template.html',id=id)
+
+
+@app.route('/delete/review/<review_id>', methods=['POST'])
+def process_confirm_delete_review(review_id):
+    selected_restaurant = client[DB_NAME].restaurants.find_one({
+        'reviews._id': ObjectId(review_id)
+    })
+    id=selected_restaurant['_id']
+    client[DB_NAME].restaurants.update_one({
+        'reviews._id': ObjectId(review_id)
+    }, {
+        '$pull': {
+            'reviews':{
+                '_id': ObjectId(review_id)
+            }
+        }
+    })
+    flash("Review deleted!")
+    return redirect(url_for('show_restaurant',id=id))
+
+# "magic code" -- boilerplate
 if __name__ == '__main__':
     # app.run(host=os.environ.get('IP'),
     #         port=int(os.environ.get('PORT')),
