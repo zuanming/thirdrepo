@@ -17,7 +17,7 @@ CLOUD_NAME = os.environ.get('CLOUD_NAME')
 UPLOAD_PRESET = os.environ.get('UPLOAD_PRESET')
 
 # define my db_name
-DB_NAME = "dating_profiles"
+DB_NAME = "food_reviews"
 
 # read in the SESSION_KEY variable from the operating system environment
 # SESSION_KEY = os.environ.get('SESSION_KEY')
@@ -35,109 +35,165 @@ def index():
 
 @app.route('/show_all')
 def show_all():
-    all_profiles = client[DB_NAME].users.find()
-    return render_template('show_all.template.html', all_profiles=all_profiles)
+    all_restaurants = client[DB_NAME].restaurants.find()
+    return render_template('show_all.template.html', all_restaurants=all_restaurants)
 
 
 @app.route('/create_new')
-def show_create_new():
+def create_new():
     return render_template('create_new.template.html', cloud_name=CLOUD_NAME, upload_preset=UPLOAD_PRESET)
 
 
 @app.route('/create_new', methods=['POST'])
 def process_create_new():
-    first_name = request.form.get('first_name')
-    last_name = request.form.get('last_name')
-    gender = request.form.get('gender')
-    dob = request.form.get('dob')
-    dob = datetime.datetime.strptime(dob, "%Y-%m-%d")
-    religion = request.form.get('religion')
-    height = request.form.get('height')
-    languages = []
+    restaurant_name = request.form.get('restaurant_name')
+    address_street = request.form.get('address_street')
+    address_unit = request.form.get('address_unit')
+    postcode = request.form.get('postcode')
+    # dob = request.form.get('dob')
+    # dob = datetime.datetime.strptime(dob, "%Y-%m-%d")
+    halal_cert = request.form.get('halal_cert')
+    restaurant_type = request.form.get('restaurant_type')
+    cuisines = []
+    if request.form.get('japanese') == 'on':
+        cuisines.append('Japanese')
     if request.form.get('english') == 'on':
-        languages.append('English')
-    if request.form.get('chinese') == 'on':
-        languages.append('Chinese')
-    if request.form.get('tamil') == 'on':
-        languages.append('Tamil')
-    if request.form.get('malay') == 'on':
-        languages.append('Malay')
-    self_summary = request.form.get('summary')
-    picture = request.form.get('uploaded_file_url')
+        cuisines.append('English')
+    if request.form.get('french') == 'on':
+        cuisines.append('French')
+    if request.form.get('italian') == 'on':
+        cuisines.append('Italian')
+    website = request.form.get('website')
+    picture_url = request.form.get('uploaded_file_url')
 
-    new_profile = {
-        'first_name': first_name,
-        'last_name': last_name,
-        'dob': dob,
-        'gender': gender,
-        'availability': True,
-        'religion': religion,
-        'height': height,
-        'languages': languages,
-        'self_summary': self_summary,
-        'picture_url': picture,
+    new_restaurant = {
+        'restaurant_name': restaurant_name,
+        'address_street': address_street,
+        'address_unit': address_unit,
+        'postcode': postcode,
+        'halal_cert': halal_cert,
+        'restaurant_type': restaurant_type,
+        'cuisines': cuisines,
+        'website': website,
+        'picture_url': picture_url,
     }
-    client[DB_NAME].users.insert_one(new_profile)
+    client[DB_NAME].restaurants.insert_one(new_restaurant)
 
     return redirect(url_for('show_all'))
 
 
-@app.route('/update/<id>')
-def show_update_profile(id):
-    selected_profile = client[DB_NAME].users.find_one({
+@app.route('/<id>')
+def show_restaurant(id):
+    selected_restaurant = client[DB_NAME].restaurants.find_one({
         '_id': ObjectId(id)
     })
-    return render_template('update_user.template.html', selected_profile=selected_profile, cloud_name=CLOUD_NAME, upload_preset=UPLOAD_PRESET)
+    return render_template('show_restaurant.template.html', restaurant=selected_restaurant)
+
+
+@app.route('/update/<id>')
+def update_restaurant(id):
+    selected_restaurant = client[DB_NAME].restaurants.find_one({
+        '_id': ObjectId(id)
+    })
+    return render_template('update_restaurant.template.html', restaurant=selected_restaurant, cloud_name=CLOUD_NAME, upload_preset=UPLOAD_PRESET)
+
 
 @app.route('/update/<id>', methods=['POST'])
-def process_update_profile(id):
-    dob = request.form.get('dob')
-    dob = datetime.datetime.strptime(dob, "%Y-%m-%d")
-    languages = []
+def process_update_restaurant(id):
+    restaurant_name = request.form.get('restaurant_name')
+    address_street = request.form.get('address_street')
+    address_unit = request.form.get('address_unit')
+    postcode = request.form.get('postcode')
+    # dob = request.form.get('dob')
+    # dob = datetime.datetime.strptime(dob, "%Y-%m-%d")
+    halal_cert = request.form.get('halal_cert')
+    restaurant_type = request.form.get('restaurant_type')
+    cuisines = []
+    if request.form.get('japanese') == 'on':
+        cuisines.append('Japanese')
     if request.form.get('english') == 'on':
-        languages.append('English')
-    if request.form.get('chinese') == 'on':
-        languages.append('Chinese')
-    if request.form.get('tamil') == 'on':
-        languages.append('Tamil')
-    if request.form.get('malay') == 'on':
-        languages.append('Malay')
-    
-    client[DB_NAME].users.update_one({
+        cuisines.append('English')
+    if request.form.get('french') == 'on':
+        cuisines.append('French')
+    if request.form.get('italian') == 'on':
+        cuisines.append('Italian')
+    website = request.form.get('website')
+    picture_url = request.form.get('uploaded_file_url')
+
+    client[DB_NAME].restaurants.update_one({
         '_id': ObjectId(id)
-    },{
-        '$set':{
-            'first_name': request.form.get('first_name'),
-            'last_name': request.form.get('last_name'),
-            'dob': dob,
-            'gender': request.form.get('gender'),
-            'availability': True,
-            'religion': request.form.get('religion'),
-            'height': request.form.get('height'),
-            'languages': languages,
-            'self_summary': request.form.get('summary'),
-            'picture_url': request.form.get('uploaded_file_url'),
+    }, {
+        '$set': {
+            'restaurant_name': restaurant_name,
+            'address_street': address_street,
+            'address_unit': address_unit,
+            'postcode': postcode,
+            'halal_cert': halal_cert,
+            'restaurant_type': restaurant_type,
+            'cuisines': cuisines,
+            'website': website,
+            'picture_url': picture_url,
         }
     })
 
     return redirect(url_for('show_all'))
 
+
 @app.route('/delete/<id>')
 def show_confirm_delete(id):
-    selected_profile=client[DB_NAME].users.find_one({
-            '_id': ObjectId(id)
-        })
-    return render_template('confirm_delete.template.html',selected_profile=selected_profile)
+    selected_restaurant = client[DB_NAME].restaurants.find_one({
+        '_id': ObjectId(id)
+    })
+    return render_template('confirm_delete.template.html', restaurant=selected_restaurant)
 
-@app.route('/delete/<id>',methods=['POST'])
+
+@app.route('/delete/<id>', methods=['POST'])
 def process_confirm_delete(id):
-    client[DB_NAME].users.remove({
+    client[DB_NAME].restaurants.remove({
         '_id': ObjectId(id)
     })
     return redirect(url_for('show_all'))
 
-# "magic code" -- boilerplate
+
+@app.route('/<id>/review/new')
+def create_review(id):
+    selected_restaurant = client[DB_NAME].restaurants.find_one({
+        '_id': ObjectId(id)
+    })
+    return render_template('create_review.template.html', restaurant=selected_restaurant)
+
+
+@app.route('/<id>/review/new', methods=['POST'])
+def process_create_review(id):
+    selected_restaurant = client[DB_NAME].restaurants.find_one({
+        '_id': ObjectId(id)
+    })
+
+    review_name = request.form.get('review_name')
+    review_food = request.form.get('review_food')
+    review_text = request.form.get('review_text')
+
+    client[DB_NAME].restaurants.update_one({
+        '_id': ObjectId(id)
+    }, {
+        '$push': {
+            'reviews': {
+                'review_name': review_name,
+                'review_food': review_food,
+                'review_text': review_text,
+            }
+        }
+    })
+    return render_template('show_restaurant.template.html', restaurant=selected_restaurant)
+
+    @app.route('/<id>/review/<review_id>')
+
+
+    # "magic code" -- boilerplate
 if __name__ == '__main__':
-    app.run(host=os.environ.get('IP'),
-            port=int(os.environ.get('PORT')),
+    # app.run(host=os.environ.get('IP'),
+    #         port=int(os.environ.get('PORT')),
+    #         debug=True)
+    app.run(host='0.0.0.0',
+            port=8080,
             debug=True)

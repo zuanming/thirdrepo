@@ -1,0 +1,88 @@
+{%extends 'layout.template.html'%}
+
+{%block title%}Update User{%endblock%}
+
+{%block content%}
+<form method='POST'>
+    <h1>Update Profile</h1>
+    <div>
+        <label>Restaurant Name</label>
+        <input type='text' name='restaurant_name' class='form-control' value='{{restaurant.restaurant_name}}'/>
+    </div>
+    <div>
+        <label>Block & Street Number</label>
+        <input type='text' name='address_street' class='form-control' value='{{restaurant.address_street}}'/>
+    </div>
+    <div>
+        <label>Unit Number</label>
+        <input type='int' name='address_unit' class='form-control' value='{{restaurant.address_unit}}'/>
+    </div>
+    <div>
+        <label>Postal Code</label>
+        <input type='int' name='postcode' class='form-control' value='{{restaurant.postcode}}'/>
+    </div>
+    <div>
+        <label>Halal Certification</label><br>
+        <input type='radio' id='halal' name='halal_cert' value='Halal' {% if restaurant.halal_cert=='Halal' %}checked{%endif%}/>
+        <label for='Halal'>Halal Certified</label>
+        <input type='radio' id='female' name='halal_cert' value='Non-Halal' {% if restaurant.halal_cert=='Non-Halal' %}checked{%endif%}/>
+        <label for='Non-Halal'>Not Halal Certified</label>
+    </div>
+    <div>
+        <label>Type of Restaurant</label>
+        <select name='restaurant_type' class='form-control'>
+            <option value='Cafe' {% if restaurant.type=='Cafe'%}selected='selected'{%endif%}>Cafe</option>
+            <option value='Bistro' {% if restaurant.type=='Bistro'%}selected='selected'{%endif%}>Bistro</option>
+            <option value='Casual Dining' {% if restaurant.type=='Casual Dining'%}selected='selected'{%endif%}>Casual Dining</option>
+            <option value='Fine Dining' {% if restaurant.type=='Fine Dining'%}selected='selected'{%endif%}>Fine Dining</option>
+            <option value='Fast Food' {% if restaurant.type=='Fast Food'%}selected='selected'{%endif%}>Fast Food</option>
+        </select>
+    </div>
+    <div>
+        <label>Cuisines</label><br>
+        <input type='checkbox' class='languages_checkbox' id='Japanese' name='japanese' {%for i in restaurant.cuisines%}{%if i=='Japanese'%}checked{%endif%}{%endfor%}/>
+        <label for='Japanese'>Japanese</label>
+        <input type='checkbox' class='languages_checkbox' id='English' name='english' {%for i in restaurant.cuisines%}{%if i=='English'%}checked{%endif%}{%endfor%}/>
+        <label for='English'>English</label>
+        <input type='checkbox' class='languages_checkbox' id='French' name='french' {%for i in restaurant.cuisines%}{%if i=='French'%}checked{%endif%}{%endfor%}/>
+        <label for='French'>French</label>
+        <input type='checkbox' class='languages_checkbox' id='Italian' name='italian' {%for i in restaurant.cuisines%}{%if i=='Italian'%}checked{%endif%}{%endfor%}/>
+        <label for='Italian'>Italian</label>
+    </div>
+    <div>
+        <label>Website</label>
+        <input type='text' name='website' class='form-control' value='{{restaurant.website}}'/>
+    </div>
+    <div>
+        Profile Picture<br>
+        <a id="upload_widget" class="cloudinary-button">Upload Image</a>
+        <input type="hidden" id="uploaded_file_url" name="uploaded_file_url"/>
+        <br/>
+        <img id="uploaded-image" src='{{restaurant.picture_url}}'>
+    </div>
+
+    <input type='submit' value='Update Details'/>
+</form>
+{%endblock%}
+
+{%block js%}
+<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>  
+
+<script type="text/javascript">  
+var myWidget = cloudinary.createUploadWidget({
+  cloudName: '{{cloud_name}}', 
+  uploadPreset: '{{upload_preset}}'}, (error, result) => { 
+    if (!error && result && result.event === "success") { 
+      console.log('Done! Here is the image info: ', result.info); 
+      document.querySelector('#uploaded_file_url').value=result.info.url
+      document.querySelector('#uploaded-image').src=result.info.thumbnail_url
+    }
+  }
+)
+
+document.getElementById("upload_widget").addEventListener("click", function(){
+    myWidget.open();
+  }, false);
+
+</script>
+{%endblock%}

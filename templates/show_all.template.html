@@ -1,33 +1,31 @@
 {%extends 'layout.template.html' %}
 
-{%block title%}Show All Profiles{%endblock%}
+{%block title%}Show All Restaurants{%endblock%}
 
 {%block content%}
-<h1>All Profiles</h1>
+<h1>All Restaurants</h1>
     <table class='table'>
         <tr>
-            <th>Name</th>
-            <th>Gender</th>
+            <th>Restaurant Name</th>
+            <th>Address</th>
             <th>Thumbnail</th>
-            <th>Availability</th>
             <th></th>
         </tr>
-    {%for profile in all_profiles%}
+    {%for restaurant in all_restaurants%}
         <tr>
-            <td>{{profile.first_name+" "+profile.last_name}}</td>
-            <td>{{profile.gender}}</td>
-            <td></td>
-            <td>{%if profile.availability==true%}
-                    Available
-                {%else%}
-                    Not Available
-                {%endif%}
+            <td><a href='{{url_for('show_restaurant',id=restaurant._id)}}'>{{restaurant.restaurant_name}}</a></td>
+            <td>{{restaurant.address_street +" " + restaurant.address_unit}}</td>
+
+            <td>
+                <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
+                <a href='{{url_for('show_confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
             </td>
-            <td></td>
         </tr>
     {%endfor%}
     </table>
+    <a href='{{url_for('create_new')}}' class='btn btn-info'>Add</a>
 {%endblock%}
+
 
 
 {%block js%}

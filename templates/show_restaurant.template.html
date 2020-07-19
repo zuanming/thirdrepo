@@ -1,0 +1,37 @@
+{%extends 'layout.template.html'%}
+
+{%block title%}Show Restaurant{%endblock%}
+
+{%block content%}
+<h1>{{restaurant.restaurant_name}}</h1>
+<div class='row'>
+    <img src='{{restaurant.picture_url}}'/>
+    <div class='col-6'>
+        <h5>Address</h5>
+        <p>{{restaurant.address_street}}</p>
+        <p>#{{restaurant.address_unit}}</p>
+        <p>Postal Code: {{restaurant.postcode}}</p>
+    </div>
+</div>
+<a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
+<a href='{{url_for('show_confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
+<h3>Reviews</h3>
+<a href='{{url_for('create_review', id = restaurant._id)}}' class='btn btn-secondary'>New Review</a>
+
+<table class='table'>
+    <tr>
+        <th>Name</th>
+        <th>Dish Selected</th>
+        <th>Review</th>
+    </tr>
+    {%for review in restaurant.reviews %}
+    <tr>
+        <th>{{review.review_name}}</th>
+        <th>{{review.review_food}}</th>
+        <th>{{review.review_text}}</th>
+    </tr>
+    {%endfor%}
+
+
+</table>
+{%endblock%}

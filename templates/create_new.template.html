@@ -4,59 +4,61 @@
 
 {%block content%}
 <form method='POST'>
-    <h1>Create Profile</h1>
+    <h1>Create a New Restaurant Profile</h1>
     <div>
-        <label>First Name</label>
-        <input type='text' name='first_name' class='form-control'/>
+        <label>Restaurant Name</label>
+        <input type='text' name='restaurant_name' class='form-control'/>
     </div>
     <div>
-        <label>Last Name</label>
-        <input type='text' name='last_name' class='form-control'/>
+        <label>Block & Street Number</label>
+        <input type='text' name='address_street' class='form-control'/>
     </div>
     <div>
-        <label>Gender</label><br>
-        <input type='radio' id='male' name='gender' value='Male'/>
-        <label for='male'>Male</label>
-        <input type='radio' id='female' name='gender' value='Female'/>
-        <label for='female'>Female</label>
+        <label>Unit Number</label>
+        <input type='int' name='address_unit' class='form-control'/>
     </div>
     <div>
+        <label>Postal Code</label>
+        <input type='int' name='postcode' class='form-control'/>
+    </div>
+    <div>
+        <label>Halal Certification</label><br>
+        <input type='radio' id='halal' name='halal_cert' value='Halal'/>
+        <label for='Halal'>Halal Certified</label>
+        <input type='radio' id='female' name='halal_cert' value='Non-Halal'/>
+        <label for='Non-Halal'>Not Halal Certified</label>
+    </div>
+    <!-- <div>
         <label>Date of Birth</label>
         <input type='date' name='dob' class='form-control'/>
-    </div>
+    </div> -->
     <div>
-        <label>Religion</label>
-        <select name='religion' class='form-control'>
-            <option value='Agnostic'>Agnostic</option>
-            <option value='Buddhist'>Buddhist</option>
-            <option value='Christian'>Christian</option>
-            <option value='Catholic'>Catholic</option>
-            <option value='Hindu'>Hindu</option>
-            <option value='Taoist'>Taoist</option>
-            <option value='Free Thinker'>Free Thinker</option>
+        <label>Type of Restaurant</label>
+        <select name='restaurant_type' class='form-control'>
+            <option value='Cafe'>Cafe</option>
+            <option value='Bistro'>Bistro</option>
+            <option value='Casual Dining'>Casual Dining</option>
+            <option value='Fine Dining'>Fine Dining</option>
+            <option value='Fast Food'>Fast Food</option>
         </select>
     </div>
     <div>
-        <label>Height (cm)</label>
-        <input type='number' name='height' class='form-control'/>
-    </div>
-    <div>
-        <label>Languages</label><br>
+        <label>Cuisines</label><br>
+        <input type='checkbox' class='languages_checkbox' id='Japanese' name='japanese'/>
+        <label for='Japanese'>Japanese</label>
         <input type='checkbox' class='languages_checkbox' id='English' name='english'/>
         <label for='English'>English</label>
-        <input type='checkbox' class='languages_checkbox' id='Chinese' name='chinese'/>
-        <label for='Chinese'>Chinese</label>
-        <input type='checkbox' class='languages_checkbox' id='Tamil' name='tamil'/>
-        <label for='Tamil'>Tamil</label>
-        <input type='checkbox' class='languages_checkbox' id='Malay' name='malay'/>
-        <label for='Malay'>Malay</label>
+        <input type='checkbox' class='languages_checkbox' id='French' name='french'/>
+        <label for='French'>French</label>
+        <input type='checkbox' class='languages_checkbox' id='Italian' name='italian'/>
+        <label for='Italian'>Italian</label>
     </div>
     <div>
-        <label>Self Summary</label>
-        <input type='text' name='summary' class='form-control'/>
+        <label>Website</label>
+        <input type='text' name='website' class='form-control'/>
     </div>
     <div>
-        Profile Picture<br>
+        Picture<br>
         <a id="upload_widget" class="cloudinary-button">Upload Image</a>
         <input type="hidden" id="uploaded_file_url" name="uploaded_file_url"/>
         <br/>
