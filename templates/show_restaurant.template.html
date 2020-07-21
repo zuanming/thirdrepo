@@ -27,13 +27,13 @@
     </tr>
     {%for review in restaurant.reviews %}
     <tr>
-        <th>{{review.review_name}}</th>
-        <th>{{review.review_food}}</th>
-        <th>{{review.review_text}}</th>
-        <th>
+        <td>{{review.review_name}}</td>
+        <td>{{review.review_food}}</td>
+        <td>{{review.review_text}}</td>
+        <td>
             <a href='{{url_for('update_review', review_id=review._id)}}' class='btn btn-primary'>Edit</a>
             <a href='{{url_for('confirm_delete_review', review_id=review._id)}}' class='btn btn-danger'>Delete</a>
-        </th>
+        </td>
     </tr>
     {%endfor%}
 
