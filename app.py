@@ -31,7 +31,7 @@ app.secret_key = SESSION_KEY
 
 @app.route('/')
 def index():
-    return 'Home'
+    return render_template('index.template.html')
 
 
 @app.route('/show_all')
