@@ -1,11 +1,52 @@
-/* .card {
+.card {
     transition: transform .1s;
 }
 .card:hover {
-    transform: scale(1.1);
-    z-index:100;
-} */
-
+    border-color: teal;
+    box-shadow: 0 0 20px teal;
+}
+body {
+  background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 255.8),
+      rgba(255, 255, 255, 0.7)
+      /* rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.7) */
+    ),
+    url("/static/images/background_image.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  background-attachment: fixed;
+  margin: 0 auto;
+}
 .btn {
-    margin:10px;
+  margin: 5px;
+}
+
+h1 {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 80px;
+    /* color: white; */
+}
+
+h2 {
+    font-weight: 300;
+    font-size: 60px;
+}
+
+.card {
+    background-color: rgba(252, 164, 1, 0.75);
+    border-style:solid;
+    border-width: 2px;
+}
+
+.table {
+    background-color: rgba(252, 164, 1, 0.75);
+    border-style: solid;
+    border-width:2px;
+    border-color: rgba(255, 157, 0, 0.429);
+    border-radius: 30;
 }

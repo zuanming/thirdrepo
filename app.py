@@ -36,7 +36,15 @@ def index():
 
 @app.route('/show_all')
 def show_all():
-    all_restaurants = client[DB_NAME].restaurants.find()
+    search_result = request.args.get('search')
+    print(search_result)
+    search_criteria = {}
+    if search_result != "" and search_result is not None:
+        search_criteria['restaurant_name'] = {
+            '$regex': search_result,
+            '$options': 'i'
+        }
+    all_restaurants = client[DB_NAME].restaurants.find(search_criteria)
     return render_template('show_all.template.html', all_restaurants=all_restaurants)
 
 
@@ -51,8 +59,6 @@ def process_create_new():
     address_street = request.form.get('address_street')
     address_unit = request.form.get('address_unit')
     postcode = request.form.get('postcode')
-    # dob = request.form.get('dob')
-    # dob = datetime.datetime.strptime(dob, "%Y-%m-%d")
     halal_cert = request.form.get('halal_cert')
     restaurant_type = request.form.get('restaurant_type')
     cuisines = []
@@ -105,8 +111,6 @@ def process_update_restaurant(id):
     address_street = request.form.get('address_street')
     address_unit = request.form.get('address_unit')
     postcode = request.form.get('postcode')
-    # dob = request.form.get('dob')
-    # dob = datetime.datetime.strptime(dob, "%Y-%m-%d")
     halal_cert = request.form.get('halal_cert')
     restaurant_type = request.form.get('restaurant_type')
     cuisines = []
@@ -171,6 +175,9 @@ def process_create_review(id):
     })
     id = selected_restaurant['_id']
 
+    dtg = datetime.datetime.strptime(
+        (datetime.datetime.now().strftime('%Y-%m-%d %H:%M')), '%Y-%m-%d %H:%M')
+    print(dtg)
     review_name = request.form.get('review_name')
     review_food = request.form.get('review_food')
     review_text = request.form.get('review_text')
@@ -184,6 +191,7 @@ def process_create_review(id):
                 'review_name': review_name,
                 'review_food': review_food,
                 'review_text': review_text,
+                'dtg': dtg,
             }
         }
     })
@@ -215,7 +223,7 @@ def process_update_review(review_id):
     selected_restaurant = client[DB_NAME].restaurants.find_one({
         'reviews._id': ObjectId(review_id)
     })
-    id=selected_restaurant['_id']
+    id = selected_restaurant['_id']
     review_name = request.form.get('review_name')
     review_food = request.form.get('review_food')
     review_text = request.form.get('review_text')
@@ -230,13 +238,14 @@ def process_update_review(review_id):
     })
     return redirect(url_for('show_restaurant', id=id))
 
+
 @app.route('/delete/review/<review_id>')
 def confirm_delete_review(review_id):
     selected_restaurant = client[DB_NAME].restaurants.find_one({
         'reviews._id': ObjectId(review_id)
     })
-    id=selected_restaurant['_id']
-    return render_template('confirm_delete_review.template.html',id=id)
+    id = selected_restaurant['_id']
+    return render_template('confirm_delete_review.template.html', id=id)
 
 
 @app.route('/delete/review/<review_id>', methods=['POST'])
@@ -244,18 +253,19 @@ def process_confirm_delete_review(review_id):
     selected_restaurant = client[DB_NAME].restaurants.find_one({
         'reviews._id': ObjectId(review_id)
     })
-    id=selected_restaurant['_id']
+    id = selected_restaurant['_id']
     client[DB_NAME].restaurants.update_one({
         'reviews._id': ObjectId(review_id)
     }, {
         '$pull': {
-            'reviews':{
+            'reviews': {
                 '_id': ObjectId(review_id)
             }
         }
     })
     flash("Review deleted!")
-    return redirect(url_for('show_restaurant',id=id))
+    return redirect(url_for('show_restaurant', id=id))
+
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':

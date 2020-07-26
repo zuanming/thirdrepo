@@ -3,27 +3,30 @@
 {%block title%}Show Restaurant{%endblock%}
 
 {%block content%}
-<h1>{{restaurant.restaurant_name}}</h1>
-<div class='row'>
+<h2>{{restaurant.restaurant_name}}</h2>
+<div class='row justify-content-center'>
     <img src='{{restaurant.picture_url}}' class='img-fluid' style='max-width:500px';/>
-    <div class='col-6'>
+    <div class='col-6 my-auto'>
         <h5>Address</h5>
         <p>{{restaurant.address_street}}</p>
         <p>#{{restaurant.address_unit}}</p>
         <p>Postal Code: {{restaurant.postcode}}</p>
+        <a href='{{restaurant.website}}' target='blank' >{{restaurant.website}}</a>
     </div>
 </div>
+<!-- <div class='container' style='text-align:left;'> -->
 <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
 <a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
 <a href='{{url_for('show_all')}}' class='btn btn-info'>Back to Main Page</a>
 <h3>Reviews</h3>
 <a href='{{url_for('create_review', id = restaurant._id)}}' class='btn btn-secondary'>New Review</a>
-
+<!-- </div> -->
 <table class='table'>
     <tr>
         <th>Name</th>
         <th>Dish Selected</th>
         <th>Review</th>
+        <th></th>
         <th></th>
     </tr>
     {%for review in restaurant.reviews %}
@@ -31,9 +34,10 @@
         <td>{{review.review_name}}</td>
         <td>{{review.review_food}}</td>
         <td>{{review.review_text}}</td>
+        <td>{{(review.dtg).strftime('%Y-%m-%d %H:%M')}} UTC</td>
         <td>
-            <!-- <a href='{{url_for('update_review', review_id=review._id)}}' class='btn btn-primary'>Edit</a>
-            <a href='{{url_for('confirm_delete_review', review_id=review._id)}}' class='btn btn-danger'>Delete</a> -->
+            <a href='{{url_for('update_review', review_id=review._id)}}' class='btn btn-primary'>Edit</a>
+            <a href='{{url_for('confirm_delete_review', review_id=review._id)}}' class='btn btn-danger'>Delete</a>
         </td>
     </tr>
     {%endfor%}

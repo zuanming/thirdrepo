@@ -2,8 +2,38 @@
 
 {%block title%}Show All Restaurants{%endblock%}
 
+{%block header%}
+    <!--Navbar-->
+    <div class="fluid sticky-top">
+      <nav
+        class="navbar navbar-expand-lg navbar-light"
+        style="background-color: rgb(252, 164, 1);"
+      >
+        <a class="navbar-brand" href="{{url_for('show_all')}}">Foodie Review</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <form class="form-inline my-2 my-lg-0" method='GET'>
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='search'/>
+            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value='Search'/>
+          </form>
+        </div>
+      </nav> 
+    </div>
+{%endblock%}
 
 {%block content%}
+
 <h1 style='text-align:center;'>Foodie Review</h1>
 <div class="card-columns">
     {%for restaurant in all_restaurants%}
@@ -19,7 +49,7 @@
             <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
             <a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
             {% if restaurant.halal_cert == 'Halal'%}
-            <img src="{{url_for('static', filename='halal_sg.jpg')}}" class = 'float-right' style = 'display:inline; width:35px; margin:5px;' alt="Halal Logo">
+            <img src="{{url_for('static', filename='images/halal_sg.png')}}" class = 'float-right' style = 'display:inline; width:35px; margin:5px;' alt="Halal Logo">
             {%endif%}
         </div>
         
@@ -27,31 +57,6 @@
     {%endfor%}
 </div>
 <a href='{{url_for('create_new')}}' class='btn btn-secondary'>Add</a>
-
-
-
-<!-- <h1>All Restaurants</h1>
-<table class='table'>
-    <tr>
-        <th>Restaurant Name</th>
-        <th>Address</th>
-        <th>Thumbnail</th>
-        <th></th>
-    </tr>
-    {%for restaurant in all_restaurants%}
-    <tr>
-        <td><a href='{{url_for('show_restaurant',id=restaurant._id)}}'>{{restaurant.restaurant_name}}</a></td>
-        <td>{{restaurant.address_street +" " + restaurant.address_unit}}</td>
-
-        <td>
-            <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
-            <a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
-        </td>
-    </tr>
-    {%endfor%}
-</table>
--->
-
 {%endblock%}
 
 
