@@ -4,6 +4,7 @@
 
 
 {%block content%}
+<h1 style='text-align:center;'>Foodie Review</h1>
 <div class="card-columns">
     {%for restaurant in all_restaurants%}
     <div class="card">
@@ -17,7 +18,11 @@
             <a href='{{url_for('show_restaurant', id=restaurant._id)}}' class='btn btn-info'>View More</a>
             <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
             <a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
+            {% if restaurant.halal_cert == 'Halal'%}
+            <img src="{{url_for('static', filename='halal_sg.jpg')}}" class = 'float-right' style = 'display:inline; width:35px; margin:5px;' alt="Halal Logo">
+            {%endif%}
         </div>
+        
     </div>
     {%endfor%}
 </div>
