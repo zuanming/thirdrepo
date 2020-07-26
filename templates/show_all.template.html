@@ -2,30 +2,52 @@
 
 {%block title%}Show All Restaurants{%endblock%}
 
+
 {%block content%}
-<h1>All Restaurants</h1>
-    <table class='table'>
-        <tr>
-            <th>Restaurant Name</th>
-            <th>Address</th>
-            <th>Thumbnail</th>
-            <th></th>
-        </tr>
+<div class="card-columns">
     {%for restaurant in all_restaurants%}
-        <tr>
-            <td><a href='{{url_for('show_restaurant',id=restaurant._id)}}'>{{restaurant.restaurant_name}}</a></td>
-            <td>{{restaurant.address_street +" " + restaurant.address_unit}}</td>
-
-            <td>
-                <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
-                <a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
-            </td>
-        </tr>
+    <div class="card">
+        <img src="{{restaurant.picture_url}}" class="card-img-top" alt="restaurant image">
+        <div class="card-body">
+            <h5 class="card-title">{{restaurant.restaurant_name}}</h5>
+            <p class="card-text">{{restaurant.address_street +" " + restaurant.address_unit}}</p>
+            <small>{{restaurant.website}}</small>
+        </div>
+        <div>
+            <a href='{{url_for('show_restaurant', id=restaurant._id)}}' class='btn btn-info'>View More</a>
+            <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
+            <a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
+        </div>
+    </div>
     {%endfor%}
-    </table>
-    <a href='{{url_for('create_new')}}' class='btn btn-info'>Add</a>
-{%endblock%}
+</div>
+<a href='{{url_for('create_new')}}' class='btn btn-secondary'>Add</a>
 
+
+
+<!-- <h1>All Restaurants</h1>
+<table class='table'>
+    <tr>
+        <th>Restaurant Name</th>
+        <th>Address</th>
+        <th>Thumbnail</th>
+        <th></th>
+    </tr>
+    {%for restaurant in all_restaurants%}
+    <tr>
+        <td><a href='{{url_for('show_restaurant',id=restaurant._id)}}'>{{restaurant.restaurant_name}}</a></td>
+        <td>{{restaurant.address_street +" " + restaurant.address_unit}}</td>
+
+        <td>
+            <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
+            <a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
+        </td>
+    </tr>
+    {%endfor%}
+</table>
+-->
+
+{%endblock%}
 
 
 {%block js%}

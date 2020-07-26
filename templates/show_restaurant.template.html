@@ -5,7 +5,7 @@
 {%block content%}
 <h1>{{restaurant.restaurant_name}}</h1>
 <div class='row'>
-    <img src='{{restaurant.picture_url}}'/>
+    <img src='{{restaurant.picture_url}}' class='img-fluid'/>
     <div class='col-6'>
         <h5>Address</h5>
         <p>{{restaurant.address_street}}</p>
@@ -15,6 +15,7 @@
 </div>
 <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
 <a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
+<a href='{{url_for('show_all')}}' class='btn btn-info'>Back to Main Page</a>
 <h3>Reviews</h3>
 <a href='{{url_for('create_review', id = restaurant._id)}}' class='btn btn-secondary'>New Review</a>
 
@@ -31,8 +32,8 @@
         <td>{{review.review_food}}</td>
         <td>{{review.review_text}}</td>
         <td>
-            <a href='{{url_for('update_review', review_id=review._id)}}' class='btn btn-primary'>Edit</a>
-            <a href='{{url_for('confirm_delete_review', review_id=review._id)}}' class='btn btn-danger'>Delete</a>
+            <!-- <a href='{{url_for('update_review', review_id=review._id)}}' class='btn btn-primary'>Edit</a>
+            <a href='{{url_for('confirm_delete_review', review_id=review._id)}}' class='btn btn-danger'>Delete</a> -->
         </td>
     </tr>
     {%endfor%}
