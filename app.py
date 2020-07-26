@@ -259,9 +259,9 @@ def process_confirm_delete_review(review_id):
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':
-    # app.run(host=os.environ.get('IP'),
-    #         port=int(os.environ.get('PORT')),
-    #         debug=True)
-    app.run(host='0.0.0.0',
-            port=8080,
+    app.run(host=os.environ.get('IP'),
+            port=int(os.environ.get('PORT')),
             debug=True)
+    # app.run(host='0.0.0.0',
+    #         port=8080,
+    #         debug=True)
