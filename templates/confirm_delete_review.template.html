@@ -2,13 +2,16 @@
 
 {%block title%}Confirm Delete Review{%endblock%}
 
+{%block navbar%}
+<a href='{{url_for('show_all')}}' class='btn btn-outline-dark'>Back to Main Page</a>
+{%endblock%}
+
 {%block content%}
 <h2>Delete Review?</h2>
 <div class='alert alert-danger'>
 <h5><span>Warning!</span>This action cannot be undone.</h5>
     <form method='POST'>
         <input type='submit' value-'Confirm' class='btn btn-danger'/>
-        <a href='{{url_for('show_restaurant',id=id)}}' class='btn btn-info'>Back to Restaurant Page</a> 
     </form>
 </div>
 {%endblock%}

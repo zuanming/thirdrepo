@@ -123,7 +123,6 @@ def process_update_restaurant(id):
     if request.form.get('italian') == 'on':
         cuisines.append('Italian')
     website = request.form.get('website')
-    picture_url = request.form.get('uploaded_file_url')
 
     client[DB_NAME].restaurants.update_one({
         '_id': ObjectId(id)
@@ -137,9 +136,18 @@ def process_update_restaurant(id):
             'restaurant_type': restaurant_type,
             'cuisines': cuisines,
             'website': website,
-            'picture_url': picture_url,
         }
     })
+
+    if request.form.get('uploaded') == 'true':
+        picture_url = request.form.get('uploaded_file_url')
+        client[DB_NAME].restaurants.update_one({
+            '_id': ObjectId(id)
+        }, {
+            '$set': {
+                'picture_url': picture_url,
+            }
+        })
 
     return redirect(url_for('show_all'))
 

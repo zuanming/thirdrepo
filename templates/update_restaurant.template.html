@@ -2,9 +2,13 @@
 
 {%block title%}Update User{%endblock%}
 
+{%block navbar%}
+<a href='{{url_for('show_all')}}' class='btn btn-outline-dark'>Back to Main Page</a>
+{%endblock%}
+
 {%block content%}
 <form method='POST'>
-    <h1>Update Profile</h1>
+    <h2>Update Profile</h2>
     <div>
         <label>Restaurant Name</label>
         <input type='text' name='restaurant_name' class='form-control' value='{{restaurant.restaurant_name}}' />
@@ -60,12 +64,13 @@
         <input type='text' name='website' class='form-control' value='{{restaurant.website}}' />
     </div>
     <div>
-        Profile Picture<br>
+        <label>Image</label><br>
         <a id="upload_widget" class="cloudinary-button">Upload Image</a>
         <input type="hidden" id="uploaded_file_url" name="uploaded_file_url" />
         <br />
         <p id="uploaded_file_display" style="display:none">Uploaded File Name:<span id="uploaded_file_name"></span></p>
         <img id="uploaded_image" src='{{restaurant.picture_url}}'>
+        <input type='hidden' id='uploaded' name='uploaded' style='display:none' value='false'/>
     </div>
 
     <input type='submit' value='Update Details' />
@@ -85,6 +90,7 @@
             document.querySelector('#uploaded_file_url').value = result.info.url;
             document.querySelector('#uploaded_file_display').style.display = 'block';
             document.querySelector('#uploaded_image').src = result.info.url;
+            document.querySelector('#uploaded').value = 'true';
         }
     }
     )

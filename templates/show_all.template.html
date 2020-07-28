@@ -2,11 +2,9 @@
 
 {%block title%}Show All Restaurants{%endblock%}
 
-{%block header%}
+{%block navbar%}
     <!--Navbar-->
-    <div class="fluid sticky-top">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="{{url_for('show_all')}}">Foodie Review</a>
+    
         <button
           class="navbar-toggler"
           type="button"
@@ -21,21 +19,26 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <form class="form-inline my-2 my-lg-0" method='GET'>
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='search'/>
-            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value='Search'/>
+            <input class="form-control mr-sm-2" type="search" placeholder="Find a restaurant!" aria-label="Search" name='search'/>
+			<input class="btn btn-outline-light my-2 my-sm-0" type="submit" value='Search'/>
           </form>
         </div>
-      </nav> 
-    </div>
+
 {%endblock%}
 
 {%block content%}
-
-<h1 style='text-align:center;'>Foodie Review</h1>
+<div style='text-align:center;margin:15px;'>
+    <h1>Foodie Reviews</h1>
+    <h5>All you need to know about your restaurants and foods. By foodies, for foodies!</h5>
+    <a href='{{url_for('create_new')}}' class='btn btn-lg btn-light'>Add a new restaurant!</a>
+</div>
 <div class="card-columns">
     {%for restaurant in all_restaurants%}
     <div class="card">
         <img src="{{restaurant.picture_url}}" class="card-img-top" alt="restaurant image">
+            {% if restaurant.halal_cert == 'Halal'%}
+            <img src="{{url_for('static', filename='images/halal_sg.png')}}" class = 'float hlogo' style = 'width:35px; margin:5px;z-index:2;' alt="Halal Logo">
+	    	{%endif%}
         <div class="card-body">
             <h5 class="card-title">{{restaurant.restaurant_name}}</h5>
             <p class="card-text">{{restaurant.address_street +" " + restaurant.address_unit}}</p>
@@ -45,15 +48,12 @@
             <a href='{{url_for('show_restaurant', id=restaurant._id)}}' class='btn btn-info'>View More</a>
             <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
             <a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
-            {% if restaurant.halal_cert == 'Halal'%}
-            <img src="{{url_for('static', filename='images/halal_sg.png')}}" class = 'float-right' style = 'display:inline; width:35px; margin:5px;' alt="Halal Logo">
-            {%endif%}
         </div>
         
     </div>
     {%endfor%}
 </div>
-<a href='{{url_for('create_new')}}' class='btn btn-secondary'>Add</a>
+
 {%endblock%}
 
 
