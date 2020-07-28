@@ -29,7 +29,8 @@
 {%block content%}
 <div style='text-align:center;margin:15px;'>
     <h1>Foodie Reviews</h1>
-    <h5>All you need to know about your restaurants and foods. By foodies, for foodies!</h5>
+    <h5>All you need to know about your restaurants and foods.</h5>
+    <h5>By foodies, for foodies!</h5>
     <a href='{{url_for('create_new')}}' class='btn btn-lg btn-light'>Add a new restaurant!</a>
 </div>
 <div class="card-columns">
@@ -44,10 +45,10 @@
             <p class="card-text">{{restaurant.address_street +" " + restaurant.address_unit}}</p>
             <small>{{restaurant.website}}</small>
         </div>
-        <div>
-            <a href='{{url_for('show_restaurant', id=restaurant._id)}}' class='btn btn-info'>View More</a>
-            <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
-            <a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
+        <div style="text-align:center;">
+            <a href='{{url_for('show_restaurant', id=restaurant._id)}}' class='btn btn-outline-info'>View More</a>
+            <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-outline-primary'>Edit</a>
+            <a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-outline-danger'>Delete</a>
         </div>
         
     </div>

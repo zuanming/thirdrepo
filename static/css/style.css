@@ -1,26 +1,28 @@
 * {
-font-family: "Open Sans", sans-serif ;
-  }
+  font-family: "Open Sans", sans-serif;
+}
 .card {
   transition: transform 0.5s;
-  background-color: #c2ebed;
+  background-color: white;
   border-style: solid;
   border-width: 2px;
+}
+@media (min-width: 980px) {
+  .card:hover {
+    border-color: #b4dfe5;
+    box-shadow: 0 0 50px #60a9b3;
+    transform: scale(1.05);
+    transform-origin: top;
+    z-index: 1000;
   }
-.card:hover {
-  border-color: #b4dfe5;
-  box-shadow: 0 0 50px #60a9b3;
-  transform: scale(1.1);
-  transform-origin: top;
-  z-index: 1000;
 }
 .navbar {
-  background-color: #f4976c;
+  background-color: #ed7d3a;
 }
 body {
   background-image: radial-gradient(
       rgba(230, 230, 230, 0.9),
-      rgba(251, 232, 166, 0.9)
+      rgba(252, 175, 88, 0.9)
     ),
     url("/static/images/background_image.jpg");
   background-position: center;
@@ -31,7 +33,7 @@ body {
   margin: 0 auto;
 }
 .btn {
-  margin: 5px;
+  margin: 6px;
 }
 
 h1 {
@@ -53,9 +55,9 @@ h2 {
   border-radius: 30;
 }
 .hlogo {
-position: absolute;
-top:0px;
-right:0px;
-box-shadow: 0 0 30px white;
-border-radius: 20px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  box-shadow: 0 0 30px white;
+  border-radius: 20px;
 }
