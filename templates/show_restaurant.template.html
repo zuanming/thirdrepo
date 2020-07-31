@@ -7,44 +7,62 @@
 {%endblock%}
 
 {%block content%}
-<h2>{{restaurant.restaurant_name}}</h2>
-<div class='row justify-content-center'>
-    <img src='{{restaurant.picture_url}}' class='img-fluid' style='max-width:500px';/>
-    <div class='col-6 my-auto'>
-        <h5>Address</h5>
-        <p>{{restaurant.address_street}}</p>
-        <p>#{{restaurant.address_unit}}</p>
-        <p>Postal Code: {{restaurant.postcode}}</p>
-        <a href='{{restaurant.website}}' target='blank' >{{restaurant.website}}</a>
+<h2 class="text-center">{{restaurant.restaurant_name}}</h2>
+<div class='row justify-content-around'>
+    <div style='max-width: 500px;'>
+        <img src='{{restaurant.picture_url}}' class='img-fluid col-m-5'/>
     </div>
+	<div class='col-m-5 mt-3 pt-3 my-auto'>
+		<h4>Address</h4>
+		<h5>{{restaurant.address_street}}</h5>
+		<h5>#{{restaurant.address_unit}}</h5>
+		<h5>Postal Code: {{restaurant.postcode}}</h5>
+		<a href='{{restaurant.website}}' target='blank'>{{restaurant.website}}</a>
+	</div>
 </div>
-<!-- <div class='container' style='text-align:center;'> -->
-<a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
-<a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
+<div class='text-right'>
+<a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-outline-primary'>Edit</a>
+<a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-outline-danger'>Delete</a>
+</div>
 <h3>Reviews</h3>
 <a href='{{url_for('create_review', id = restaurant._id)}}' class='btn btn-secondary'>New Review</a>
-<!-- </div> -->
-<table class='table'>
-    <tr>
-        <th>Name</th>
-        <th>Dish Selected</th>
-        <th>Review</th>
-        <th>Posted on (UTC)</th>
-        <th></th>
-    </tr>
-    {%for review in restaurant.reviews %}
-    <tr>
-        <td>{{review.review_name}}</td>
-        <td>{{review.review_food}}</td>
-        <td>{{review.review_text}}</td>
-        <td>{{(review.dtg).strftime('%Y-%m-%d %H:%M')}}</td>
-        <td>
-            <a href='{{url_for('update_review', review_id=review._id)}}' class='btn btn-primary'>Edit</a>
-            <a href='{{url_for('confirm_delete_review', review_id=review._id)}}' class='btn btn-danger'>Delete</a>
-        </td>
-    </tr>
-    {%endfor%}
 
+
+
+<ul class='list-group'>
+	{%for review in restaurant.reviews %}
+	<li class="list-group-item">
+			<h5>{{review.review_food}}</h5>
+			<p class='m-2'>{{review.review_text}}</p>
+			<p class='blockquote-footer text-right'>{{review.review_name}}</p>
+			<p class='small text-right'>UTC {{(review.dtg).strftime('%Y-%m-%d %H:%M')}}</p>
+			<a href='{{url_for('update_review', review_id=review._id)}}' class='btn btn-outline-primary'>Edit</a>
+			<a href='{{url_for('confirm_delete_review', review_id=review._id)}}' class='btn btn-outline-danger'>Delete</a>
+	</li>
+	{%endfor%}
+</ul>
+
+
+<!-- <div class='card-group'>
+	{%for review in restaurant.reviews %}
+	<div class="card border-light mb-3" style="max-width: 18rem;">
+		<div class="card-header bg-transparent border-light">
+			<h5>{{review.review_food}}</h5>
+		</div>
+		<div class="card-body text-dark">
+			<span class="card-text">{{review.review_text}}</span>
+		</div>
+		<div class="card-footer bg-transparent text-right">
+			<span class='blockquote-footer'>{{review.review_name}}</span>
+			<span class='small'>UTC {{(review.dtg).strftime('%Y-%m-%d %H:%M')}}</span>
+		</div>
+		<div class="card-footer bg-transparent border-light">
+			<a href='{{url_for('update_review', review_id=review._id)}}' class='btn btn-outline-primary'>Edit</a>
+			<a href='{{url_for('confirm_delete_review', review_id=review._id)}}' class='btn btn-outline-danger'>Delete</a>
+		</div>
+	</div>
+	{%endfor%}
+</div> -->
 
 </table>
 {%endblock%}

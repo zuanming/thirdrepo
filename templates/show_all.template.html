@@ -3,26 +3,26 @@
 {%block title%}Show All Restaurants{%endblock%}
 
 {%block navbar%}
-    <!--Navbar-->
-    
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+<!--Navbar-->
+<button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+>
+    <span class="navbar-toggler-icon"></span>
+</button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <form class="form-inline my-2 my-lg-0" method='GET'>
-            <input class="form-control mr-sm-2" type="search" placeholder="Find a restaurant!" aria-label="Search" name='search'/>
-			<input class="btn btn-outline-light my-2 my-sm-0" type="submit" value='Search'/>
-          </form>
-        </div>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <form class="form-inline my-2 my-lg-0" method='GET'>
+        <input id='search' class="form-control mr-sm-2" type="search" placeholder="Find a restaurant!" aria-label="Search" name='search'/>
+        <input class="btn btn-outline-light my-2 my-sm-0" type="submit" value='Search'/>
+    </form>
+    <span id='searchResult' style="display:none;"><em>Your search of "<u>{{search_result}}</u>" returned <u>{{search_count}}</u> result(s)</em></span>
+</div>
 
 {%endblock%}
 
@@ -35,17 +35,18 @@
 </div>
 <div class="card-columns">
     {%for restaurant in all_restaurants%}
-    <div class="card">
-        <img src="{{restaurant.picture_url}}" class="card-img-top" alt="restaurant image">
-            {% if restaurant.halal_cert == 'Halal'%}
-            <img src="{{url_for('static', filename='images/halal_sg.png')}}" class = 'float hlogo' style = 'width:35px; margin:5px;z-index:2;' alt="Halal Logo">
-	    	{%endif%}
+    <div class="card cardblock">
+        <a href='{{url_for('show_restaurant', id=restaurant._id)}}'><img src="{{restaurant.picture_url}}" class="card-img-top" alt="restaurant image"></a>
+        {% if restaurant.halal_cert == 'Halal'%}
+        <img src="{{url_for('static', filename='images/halal_sg.png')}}" class = 'float hlogo' style = 'width:35px; margin:5px;z-index:2;' alt="Halal Logo">
+        {%endif%}
+        
         <div class="card-body">
             <h5 class="card-title">{{restaurant.restaurant_name}}</h5>
             <p class="card-text">{{restaurant.address_street +" " + restaurant.address_unit}}</p>
-            <small>{{restaurant.website}}</small>
+            <a href='{{restaurant.website}}' target='blank'><small>{{restaurant.website}}</small></a>
         </div>
-        <div style="text-align:center;">
+        <div class = "card-footer" style="text-align:center;">
             <a href='{{url_for('show_restaurant', id=restaurant._id)}}' class='btn btn-outline-info'>View More</a>
             <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-outline-primary'>Edit</a>
             <a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-outline-danger'>Delete</a>
@@ -57,7 +58,14 @@
 
 {%endblock%}
 
-
 {%block js%}
-
+<script>
+var searchResult="{{search_result}}"
+    if ((searchResult != "") && (searchResult != null)){
+        document.querySelector('#searchResult').style.display="block"
+    }
+    else{
+        document.querySelector('#searchResult').style.display="none"
+    }
+</script>
 {%endblock%}

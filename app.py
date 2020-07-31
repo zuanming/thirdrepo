@@ -37,15 +37,19 @@ def index():
 @app.route('/show_all')
 def show_all():
     search_result = request.args.get('search')
-    print(search_result)
     search_criteria = {}
     if search_result != "" and search_result is not None:
         search_criteria['restaurant_name'] = {
             '$regex': search_result,
             '$options': 'i'
         }
-    all_restaurants = client[DB_NAME].restaurants.find(search_criteria)
-    return render_template('show_all.template.html', all_restaurants=all_restaurants)
+        search_restaurants = client[DB_NAME].restaurants.find(search_criteria)
+        search_count = client[DB_NAME].restaurants.count(search_criteria)
+        return render_template('show_all.template.html', all_restaurants=search_restaurants, search_result=search_result, search_count=search_count)
+
+    else:
+        all_restaurants = client[DB_NAME].restaurants.find()
+        return render_template('show_all.template.html', all_restaurants=all_restaurants)
 
 
 @app.route('/create_new')
@@ -85,7 +89,7 @@ def process_create_new():
         'picture_url': picture_url,
     }
     client[DB_NAME].restaurants.insert_one(new_restaurant)
-
+    flash("Retaurant added!")
     return redirect(url_for('show_all'))
 
 
@@ -148,6 +152,7 @@ def process_update_restaurant(id):
                 'picture_url': picture_url,
             }
         })
+        flash("Restaurant updated!")
 
     return redirect(url_for('show_all'))
 
@@ -165,6 +170,7 @@ def process_confirm_delete(id):
     client[DB_NAME].restaurants.remove({
         '_id': ObjectId(id)
     })
+    flash("Restaurant deleted!")
     return redirect(url_for('show_all'))
 
 
@@ -244,6 +250,7 @@ def process_update_review(review_id):
             'reviews.$.review_text': review_text,
         }
     })
+    flash("Review updated!")
     return redirect(url_for('show_restaurant', id=id))
 
 
