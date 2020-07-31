@@ -4,7 +4,7 @@
 
 {%block content%}
 <form method='POST'>
-    <h2>Create a New Restaurant Profile</h2>
+    <h2>Add a New Restaurant Profile</h2>
     <a href="{{url_for('show_all')}}" class='btn btn-danger'>Cancel</a>
     <div>
         <label>Restaurant Name</label>
@@ -29,10 +29,6 @@
         <input type='radio' id='female' name='halal_cert' value='Non-Halal' />
         <label for='Non-Halal'>Not Halal Certified</label>
     </div>
-    <!-- <div>
-        <label>Date of Birth</label>
-        <input type='date' name='dob' class='form-control'/>
-    </div> -->
     <div>
         <label>Type of Restaurant</label>
         <select name='restaurant_type' class='form-control'>
