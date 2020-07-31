@@ -73,7 +73,7 @@
         <input type='hidden' id='uploaded' name='uploaded' style='display:none' value='false'/>
     </div>
 
-    <input type='submit' value='Update Details' />
+    <input type='submit' id='submit' value='Update Details' />
 </form>
 {%endblock%}
 
@@ -98,6 +98,14 @@
     document.getElementById("upload_widget").addEventListener("click", function () {
         myWidget.open();
     }, false);
-
+</script>
+<script>
+    var halal=document.getElementsByName('halal_cert');
+    document.getElementById('submit').onclick = function(){
+        if (!(halal[0].checked || halal[1].checked)) {
+                alert("Please indicate if the restaurant is Halal Certified!");
+                return false;
+        }
+    };
 </script>
 {%endblock%}

@@ -8,11 +8,11 @@
     <a href="{{url_for('show_all')}}" class='btn btn-danger'>Cancel</a>
     <div>
         <label>Restaurant Name</label>
-        <input type='text' name='restaurant_name' class='form-control' />
+        <input type='text' name='restaurant_name' class='form-control' required/>
     </div>
     <div>
         <label>Block & Street Number</label>
-        <input type='text' name='address_street' class='form-control' />
+        <input type='text' name='address_street' class='form-control' required/>
     </div>
     <div>
         <label>Unit Number</label>
@@ -20,7 +20,7 @@
     </div>
     <div>
         <label>Postal Code</label>
-        <input type='int' name='postcode' class='form-control' />
+        <input type='int' name='postcode' class='form-control' required/>
     </div>
     <div>
         <label>Halal Certification</label><br>
@@ -66,7 +66,7 @@
         <img id="uploaded_image">
     </div>
 
-    <input type='submit' value='Submit' />
+    <input type='submit' id='submit' value='Submit' />
 </form>
 {%endblock%}
 
@@ -89,6 +89,15 @@
     document.getElementById("upload_widget").addEventListener("click", function () {
         myWidget.open();
     }, false);
+</script>
+<script>
+    var halal=document.getElementsByName('halal_cert');
+    document.getElementById('submit').onclick = function(){
+        if (!(halal[0].checked || halal[1].checked)) {
+                alert("Please indicate if the restaurant is Halal Certified!");
+                return false;
+        }
+    };
 </script>
 
 {%endblock%}

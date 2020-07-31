@@ -11,15 +11,15 @@
     <h2>Edit review for {{restaurant.restaurant_name}}</h2>
     <div>
         <label>Name</label>
-        <input type='text' name='review_name' class='form-control' value='{{review.review_name}}'/>
+        <input type='text' name='review_name' class='form-control' value='{{review.review_name}}' required/>
     </div>
     <div>
         <label>Choice of food</label>
-        <input type='text' name='review_food' class='form-control'  value='{{review.review_food}}'/>
+        <input type='text' name='review_food' class='form-control'  value='{{review.review_food}}' required/>
     </div>
     <div>
         <label>Review:</label>
-        <input type='text' name='review_text' class='form-control' value='{{review.review_text}}'/>
+        <input type='text' name='review_text' class='form-control' value='{{review.review_text}}' required/>
     </div>
     <input type='submit' value='Update'/>
 </form>
