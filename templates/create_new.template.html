@@ -1,98 +1,120 @@
-{%extends 'layout.template.html'%}
-
-{%block title%}Create New Profile{%endblock%}
-
+{%extends 'layout.template.html'%} {%block title%}Create New Profile{%endblock%}
 {%block content%}
-<form method='POST'>
-    <h2>Add a New Restaurant Profile</h2>
-    <a href="{{url_for('show_all')}}" class='btn btn-danger'>Cancel</a>
-    <div>
-        <label>Restaurant Name</label>
-        <input type='text' name='restaurant_name' class='form-control' required/>
-    </div>
-    <div>
-        <label>Block & Street Number</label>
-        <input type='text' name='address_street' class='form-control' required/>
-    </div>
-    <div>
-        <label>Unit Number</label>
-        <input type='text' name='address_unit' class='form-control' />
-    </div>
-    <div>
-        <label>Postal Code</label>
-        <input type='text' name='postcode' class='form-control' required/>
-    </div>
-    <div>
-        <label>Halal Certification</label><br>
-        <input type='radio' id='halal' name='halal_cert' value='Halal' />
-        <label for='halal'>Halal Certified</label>
-        <input type='radio' id='non-halal' name='halal_cert' value='Non-Halal' />
-        <label for='non-halal'>Not Halal Certified</label>
-    </div>
-    <div>
-        <label>Type of Restaurant</label>
-        <select name='restaurant_type' class='form-control'>
-            <option value='Cafe'>Cafe</option>
-            <option value='Bistro'>Bistro</option>
-            <option value='Casual Dining'>Casual Dining</option>
-            <option value='Fine Dining'>Fine Dining</option>
-            <option value='Fast Food'>Fast Food</option>
-        </select>
-    </div>
-    <div>
-        <label>Cuisines</label><br>
-        <input type='checkbox' class='languages_checkbox' id='Japanese' name='japanese' />
-        <label for='Japanese'>Japanese</label>
-        <input type='checkbox' class='languages_checkbox' id='English' name='english' />
-        <label for='English'>English</label>
-        <input type='checkbox' class='languages_checkbox' id='French' name='french' />
-        <label for='French'>French</label>
-        <input type='checkbox' class='languages_checkbox' id='Italian' name='italian' />
-        <label for='Italian'>Italian</label>
-    </div>
-    <div>
-        <label>Website</label>
-        <input type='text' name='website' class='form-control'/>
-    </div>
-    <div>
-        Picture<br>
-        <a id="upload_widget" class="cloudinary-button">Upload Image</a>
-        <input type="hidden" id="uploaded_file_url" name="uploaded_file_url" />
-        <br />
-        <img id="uploaded_image" alt='uploaded image' style="max-width: 500px;">
-    </div>
-    <input type='submit' id='submit' value='Submit' />
+<form method="POST">
+  <h2>Add a New Restaurant Profile</h2>
+  <a href="{{url_for('show_all')}}" class="btn btn-danger">Cancel</a>
+  <div>
+    <label>Restaurant Name</label>
+    <input type="text" name="restaurant_name" class="form-control" required />
+  </div>
+  <div>
+    <label>Block & Street Number</label>
+    <input type="text" name="address_street" class="form-control" required />
+  </div>
+  <div>
+    <label>Unit Number</label>
+    <input type="text" name="address_unit" class="form-control" />
+  </div>
+  <div>
+    <label>Postal Code</label>
+    <input type="text" name="postcode" class="form-control" required />
+  </div>
+  <div>
+    <label>Halal Certification</label><br />
+    <input type="radio" id="halal" name="halal_cert" value="Halal" />
+    <label for="halal">Halal Certified</label>
+    <input type="radio" id="non-halal" name="halal_cert" value="Non-Halal" />
+    <label for="non-halal">Not Halal Certified</label>
+  </div>
+  <div>
+    <label>Type of Restaurant</label>
+    <select name="restaurant_type" class="form-control">
+      <option value="Cafe">Cafe</option>
+      <option value="Bistro">Bistro</option>
+      <option value="Casual Dining">Casual Dining</option>
+      <option value="Fine Dining">Fine Dining</option>
+      <option value="Fast Food">Fast Food</option>
+    </select>
+  </div>
+  <div>
+    <label>Cuisines</label><br />
+    <input
+      type="checkbox"
+      class="languages_checkbox"
+      id="Japanese"
+      name="japanese"
+    />
+    <label for="Japanese">Japanese</label>
+    <input
+      type="checkbox"
+      class="languages_checkbox"
+      id="English"
+      name="english"
+    />
+    <label for="English">English</label>
+    <input
+      type="checkbox"
+      class="languages_checkbox"
+      id="French"
+      name="french"
+    />
+    <label for="French">French</label>
+    <input
+      type="checkbox"
+      class="languages_checkbox"
+      id="Italian"
+      name="italian"
+    />
+    <label for="Italian">Italian</label>
+  </div>
+  <div>
+    <label>Website</label>
+    <input type="text" name="website" class="form-control" />
+  </div>
+  <div>
+    Picture<br />
+    <a id="upload_widget" class="cloudinary-button">Upload Image</a>
+    <input type="hidden" id="uploaded_file_url" name="uploaded_file_url" />
+    <br />
+    <img id="uploaded_image" alt="uploaded image" style="max-width: 500px;" />
+  </div>
+  <input type="submit" id="submit" value="Submit" />
 </form>
-{%endblock%}
-
-{%block js%}
+{%endblock%} {%block js%}
 <script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
 
 <script>
-    var myWidget = cloudinary.createUploadWidget({
-        cloudName: '{{cloud_name}}',
-        uploadPreset: '{{upload_preset}}'
-    }, (error, result) => {
-        if (!error && result && result.event === "success") {
-            console.log('Done! Here is the image info: ', result.info);
-            document.querySelector('#uploaded_file_url').value = result.info.url
-            document.querySelector('#uploaded_image').src = result.info.url
-        }
-    })
-    document.getElementById("upload_widget").addEventListener("click", function () {
-        myWidget.open();
-    }, false);
+  var myWidget = cloudinary.createUploadWidget(
+    {
+      cloudName: "{{cloud_name}}",
+      uploadPreset: "{{upload_preset}}",
+    },
+    (error, result) => {
+      if (!error && result && result.event === "success") {
+        console.log("Done! Here is the image info: ", result.info);
+        document.querySelector("#uploaded_file_url").value = result.info.url;
+        document.querySelector("#uploaded_image").src = result.info.url;
+      }
+    }
+  );
+  document.getElementById("upload_widget").addEventListener(
+    "click",
+    function () {
+      myWidget.open();
+    },
+    false
+  );
 </script>
 <script>
-    var halal=document.getElementsByName('halal_cert');
-    document.getElementById('submit').onclick = function(){
-        if (!(halal[0].checked || halal[1].checked)) {
-                alert("Please indicate if the restaurant is Halal Certified!");
-                return false;
-        }else if (!(document.querySelector('#uploaded_image').src)){
-            alert("Please upload an image of the restaurant!");
-                return false;
-        }
-    };
+  var halal = document.getElementsByName("halal_cert");
+  document.getElementById("submit").onclick = function () {
+    if (!(halal[0].checked || halal[1].checked)) {
+      alert("Please indicate if the restaurant is Halal Certified!");
+      return false;
+    } else if (!document.querySelector("#uploaded_image").src) {
+      alert("Please upload an image of the restaurant!");
+      return false;
+    }
+  };
 </script>
 {%endblock%}

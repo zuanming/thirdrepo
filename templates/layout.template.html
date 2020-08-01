@@ -39,7 +39,10 @@
       type="text/css"
     />
 
-    <link rel="shortcut icon" href="https://res.cloudinary.com/dhktrng6p/image/upload/v1596191024/Screenshot_2020-07-31_at_6.21.01_PM_zyami0.png" />
+    <link
+      rel="shortcut icon"
+      href="https://res.cloudinary.com/dhktrng6p/image/upload/v1596191024/Screenshot_2020-07-31_at_6.21.01_PM_zyami0.png"
+    />
 
     <title>{%block title%}{%endblock%}</title>
   </head>
@@ -47,7 +50,9 @@
   <body>
     <div class="fluid sticky-top">
       <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="{{url_for('show_all')}}">Foodie Reviews</a>
+        <a class="navbar-brand" href="{{url_for('show_all')}}"
+          >Foodie Reviews</a
+        >
         {%block navbar%}{%endblock%}
       </nav>
     </div>

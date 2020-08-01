@@ -1,22 +1,19 @@
-{%extends 'layout.template.html'%}
-
-{%block title%}Write a Review{%endblock%}
-
+{%extends 'layout.template.html'%} {%block title%}Write a Review{%endblock%}
 {%block content%}
-<form method='POST'>
-    <h2>Write a review for {{restaurant.restaurant_name}}</h2>
-    <div>
-        <label>Name</label>
-        <input type='text' name='review_name' class='form-control' required/>
-    </div>
-    <div>
-        <label>Choice of food</label>
-        <input type='text' name='review_food' class='form-control' required/>
-    </div>
-    <div>
-        <label>Review:</label>
-        <input type='text' name='review_text' class='form-control' required/>
-    </div>
-    <input type='submit' value='Post'/>
+<form method="POST">
+  <h2>Write a review for {{restaurant.restaurant_name}}</h2>
+  <div>
+    <label>Name</label>
+    <input type="text" name="review_name" class="form-control" required />
+  </div>
+  <div>
+    <label>Choice of food</label>
+    <input type="text" name="review_food" class="form-control" required />
+  </div>
+  <div>
+    <label>Review:</label>
+    <input type="text" name="review_text" class="form-control" required />
+  </div>
+  <input type="submit" value="Post" />
 </form>
 {%endblock%}
