@@ -52,7 +52,7 @@
     </div>
     <div>
         <label>Website</label>
-        <input type='text' name='website' class='form-control' />
+        <input type='text' name='website' class='form-control'/>
     </div>
     <div>
         Picture<br>
@@ -61,7 +61,6 @@
         <br />
         <img id="uploaded_image">
     </div>
-
     <input type='submit' id='submit' value='Submit' />
 </form>
 {%endblock%}
@@ -79,9 +78,7 @@
             document.querySelector('#uploaded_file_url').value = result.info.url
             document.querySelector('#uploaded_image').src = result.info.url
         }
-    }
-    )
-
+    })
     document.getElementById("upload_widget").addEventListener("click", function () {
         myWidget.open();
     }, false);
@@ -91,6 +88,9 @@
     document.getElementById('submit').onclick = function(){
         if (!(halal[0].checked || halal[1].checked)) {
                 alert("Please indicate if the restaurant is Halal Certified!");
+                return false;
+        }else if (!(document.querySelector('#uploaded_image').src)){
+            alert("Please upload an image of the restaurant!");
                 return false;
         }
     };
