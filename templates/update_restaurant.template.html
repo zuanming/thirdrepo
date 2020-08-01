@@ -19,20 +19,20 @@
     </div>
     <div>
         <label>Unit Number</label>
-        <input type='int' name='address_unit' class='form-control' value='{{restaurant.address_unit}}' />
+        <input type='text' name='address_unit' class='form-control' value='{{restaurant.address_unit}}' />
     </div>
     <div>
         <label>Postal Code</label>
-        <input type='int' name='postcode' class='form-control' value='{{restaurant.postcode}}' />
+        <input type='text' name='postcode' class='form-control' value='{{restaurant.postcode}}' />
     </div>
     <div>
         <label>Halal Certification</label><br>
         <input type='radio' id='halal' name='halal_cert' value='Halal'
             {% if restaurant.halal_cert=='Halal' %}checked{%endif%} />
-        <label for='Halal'>Halal Certified</label>
-        <input type='radio' id='female' name='halal_cert' value='Non-Halal'
+        <label for='halal'>Halal Certified</label>
+        <input type='radio' id='non-halal' name='halal_cert' value='Non-Halal'
             {% if restaurant.halal_cert=='Non-Halal' %}checked{%endif%} />
-        <label for='Non-Halal'>Not Halal Certified</label>
+        <label for='non-halal'>Not Halal Certified</label>
     </div>
     <div>
         <label>Type of Restaurant</label>
@@ -78,9 +78,9 @@
 {%endblock%}
 
 {%block js%}
-<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+<script src="https://widget.cloudinary.com/v2.0/global/all.js"></script>
 
-<script type="text/javascript">
+<script>
     var myWidget = cloudinary.createUploadWidget({
         cloudName: '{{cloud_name}}',
         uploadPreset: '{{upload_preset}}'
