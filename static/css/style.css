@@ -16,9 +16,9 @@
     z-index: 1000;
   }
 }
-@media (min-width: 481px) and (max-width:980px){
+@media (min-width: 481px) and (max-width: 980px) {
   .card-columns {
-      column-count:2;
+    column-count: 2;
   }
 }
 .navbar {
@@ -48,22 +48,14 @@ h1 {
 }
 
 h2 {
-    margin: 15px;
+  margin: 15px;
   font-weight: 300;
   font-size: 36px;
 }
-
-.table {
-  background-color: rgba(167, 181, 207, 0.75);
-  border-style: solid;
-  border-width: 2px;
-  /* border-color: rgba(81, 126, 148); */
-  border-radius: 30;
-}
 .hlogo {
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 0;
+  right: 0;
   box-shadow: 0 0 30px white;
   border-radius: 20px;
 }
