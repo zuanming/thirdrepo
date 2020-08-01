@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
-
 import pymongo
 from dotenv import load_dotenv
 from bson import ObjectId
@@ -76,7 +75,6 @@ def process_create_new():
         cuisines.append('Italian')
     website = request.form.get('website')
     picture_url = request.form.get('uploaded_file_url')
-
     new_restaurant = {
         'restaurant_name': restaurant_name,
         'address_street': address_street,
@@ -127,7 +125,6 @@ def process_update_restaurant(id):
     if request.form.get('italian') == 'on':
         cuisines.append('Italian')
     website = request.form.get('website')
-
     client[DB_NAME].restaurants.update_one({
         '_id': ObjectId(id)
     }, {
@@ -142,7 +139,6 @@ def process_update_restaurant(id):
             'website': website,
         }
     })
-
     if request.form.get('uploaded') == 'true':
         picture_url = request.form.get('uploaded_file_url')
         client[DB_NAME].restaurants.update_one({
@@ -153,7 +149,6 @@ def process_update_restaurant(id):
             }
         })
         flash("Restaurant updated!")
-
     return redirect(url_for('show_all'))
 
 
@@ -188,14 +183,12 @@ def process_create_review(id):
         '_id': ObjectId(id)
     })
     id = selected_restaurant['_id']
-
     dtg = datetime.datetime.strptime(
         (datetime.datetime.now().strftime('%Y-%m-%d %H:%M')), '%Y-%m-%d %H:%M')
     print(dtg)
     review_name = request.form.get('review_name')
     review_food = request.form.get('review_food')
     review_text = request.form.get('review_text')
-
     client[DB_NAME].restaurants.update_one({
         '_id': ObjectId(id)
     }, {
@@ -218,7 +211,6 @@ def update_review(review_id):
     selected_restaurant = client[DB_NAME].restaurants.find_one({
         'reviews._id': ObjectId(review_id)
     })
-
     all_reviews = client[DB_NAME].restaurants.find_one({
         'reviews._id': ObjectId(review_id)
     }, {
@@ -286,4 +278,4 @@ def process_confirm_delete_review(review_id):
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
-            debug=True)
+            debug=False)
