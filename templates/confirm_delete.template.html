@@ -12,6 +12,7 @@
 <h5><span>Warning!</span>This action cannot be undone.</h5>
     <form method='POST'>
         <input type='submit' value='Confirm' class='btn btn-danger'/>
+        <a href='{{url_for('show_all')}}' class='btn btn-secondary'>Cancel</a>
     </form>
 </div>
 {%endblock%}
