@@ -12,23 +12,19 @@
     <div style='max-width: 500px;'>
         <img src='{{restaurant.picture_url}}' class='img-fluid col-m-5'/>
     </div>
-	<div class='col-m-5 mt-3 pt-3 my-auto'>
+	<div class='col-m-5 mt-3 mb-3 pt-3 my-auto'>
 		<h4>Address</h4>
 		<h5>{{restaurant.address_street}}</h5>
 		<h5>#{{restaurant.address_unit}}</h5>
 		<h5>Postal Code: {{restaurant.postcode}}</h5>
-		<a href='{{restaurant.website}}' target='blank'>{{restaurant.website}}</a>
+		<a href='{{restaurant.website}}' target='blank'>{{restaurant.website}}</a></br>
+        <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
+        <a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
 	</div>
 </div>
-<div class='text-right'>
-<a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
-<a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
-</div>
+
 <h3>Reviews</h3>
-<a href='{{url_for('create_review', id = restaurant._id)}}' class='btn btn-secondary'>New Review</a>
-
-
-
+<a href='{{url_for('create_review', id = restaurant._id)}}' class='btn btn-secondary mb-3'>New Review</a>
 <ul class='list-group'>
 	{%for review in restaurant.reviews %}
 	<li class="list-group-item">
@@ -41,28 +37,4 @@
 	</li>
 	{%endfor%}
 </ul>
-
-
-<!-- <div class='card-group'>
-	{%for review in restaurant.reviews %}
-	<div class="card border-light mb-3" style="max-width: 18rem;">
-		<div class="card-header bg-transparent border-light">
-			<h5>{{review.review_food}}</h5>
-		</div>
-		<div class="card-body text-dark">
-			<span class="card-text">{{review.review_text}}</span>
-		</div>
-		<div class="card-footer bg-transparent text-right">
-			<span class='blockquote-footer'>{{review.review_name}}</span>
-			<span class='small'>UTC {{(review.dtg).strftime('%Y-%m-%d %H:%M')}}</span>
-		</div>
-		<div class="card-footer bg-transparent border-light">
-			<a href='{{url_for('update_review', review_id=review._id)}}' class='btn btn-outline-primary'>Edit</a>
-			<a href='{{url_for('confirm_delete_review', review_id=review._id)}}' class='btn btn-outline-danger'>Delete</a>
-		</div>
-	</div>
-	{%endfor%}
-</div> -->
-
-</table>
 {%endblock%}
