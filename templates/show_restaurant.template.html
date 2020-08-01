@@ -17,7 +17,8 @@
 		<h5>{{restaurant.address_street}}</h5>
 		<h5>#{{restaurant.address_unit}}</h5>
 		<h5>Postal Code: {{restaurant.postcode}}</h5>
-		<a href='{{restaurant.website}}' target='blank'>{{restaurant.website}}</a></br>
+		<a href='{{restaurant.website}}' target='blank'>{{restaurant.website}}</a>
+        <br>
         <a href='{{url_for('update_restaurant', id=restaurant._id)}}' class='btn btn-primary'>Edit</a>
         <a href='{{url_for('confirm_delete', id=restaurant._id)}}' class='btn btn-danger'>Delete</a>
 	</div>
