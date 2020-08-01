@@ -16,6 +16,12 @@
     z-index: 1000;
   }
 }
+@media (min-width: 481px) and (max-width:980px){
+  .card-columns {
+      column-count:2;
+  }
+}
+
 .navbar {
   background-color: #ed7d3a;
 }
