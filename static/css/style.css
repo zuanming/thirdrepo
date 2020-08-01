@@ -16,9 +16,14 @@
     z-index: 1000;
   }
 }
-@media (min-width: 481px) and (max-width: 980px) {
+@media screen and (max-width: 980px) {
   .card-columns {
-    column-count: 2;
+    column-count: 2 !important;
+  }
+}
+@media screen and (max-width: 480px) {
+  .card-columns {
+    column-count: 1 !important;
   }
 }
 .navbar {
