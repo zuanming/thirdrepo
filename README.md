@@ -6,20 +6,41 @@ This project is built as a webpage for food lovers to read and write reviews abo
 ![Mockup image](https://res.cloudinary.com/dhktrng6p/image/upload/v1596277181/Screenshot_2020-08-01_at_6.19.24_PM_wjyjjp.png "Devices Mockup")
 
 ## Objective
-Food is an essential need for all organisms, and we humans are no exception. It is a basic need to survive, nourishes our body with necessary nutrients for growth. In the modern day, food has become much more - food has expanded beyond serving our basic needs. We now hold business discussions over food, social gatherings over food, celebrations over food, etc. Food has become so widely available with such variety that we may never finish tasting them all.
-This website is all about sharing experiences with different types of foods, including the environment in which they are consumed (Restaurants) so that users may either share or find out more about what they would like to eat. Users can read the reviews written by other users and decide for themselves if they want to try, or they can write a review themselves to share their dining experience with others. This website aims to be a platform for which people can exchange views about how their favourite foods taste. Although different tastes appeal to different people, there is no better way to have a better understanding about the desired food than to hear from those who have tasted them.
+Food is a basic necessity for all. The modern world is a food paradise and people are willing to queue and try new and fun food. To ensure that their time and effort is worth it, people will usually check on food reviews to ensure the quality of food. 
+
+For a demand side, people love taking photos of their “Instagram-worthy” food but are all the “Instagram-worthy” delicious and worth the hype?
+
+This platform enables users to share their love for food and experience by publishing reviews and sharing with the community. By providing a review, they are paying it forward and help others in making good food choices. 
 
 
+External user’s goal:
+To share the love for food by publishing reviews and clock points to get exclusive discount codes.
 
-
+Site owner’s goal:
+Provide a platform for food reviews to share the love for food and expand the user base to attract restaurant owners to purchase advertising space eventually.
 
 ## UX
+Information on the several restaurants such as website and address can be found on the home page. Users can be easily redirected to the several restaurants’ website if they would like to find out more. Search button is displayed prominently at the top menu bar to enable users to search for their preferred restaurants.
+
+When clicking into the respective restaurant to find out more information, there is a “Back to Main Page” on the top banner to navigate back to the home page. The “New Review” button is also placed at the top of the page to allow users to add a review without looking through the other reviews. All the past reviews are ranked based on dates. The food item that was reviewed is also clearly displayed in the title of the reviews to enable easy viewing. Users can also do real-time updates of the reviews. Upon completion of the review, there is also a button to return to the main page. If users accidentally click the “Delete” button, there is an error message to prompt users that the action is irreversible and to confirm the action. Users can click “Cancel” to go back to the home page.
+
+With the tagging of halal and type of cuisine, the website enables users to filter the results based on their preferences and dietary requirements.
+
+Users are directed back the home page if there are no reviews for the restaurant which they are interested in.
+
 
 ## UI
 
-
-## Features
+### Features
 The webpage has the following features:
+
+- The home page layout displays the image of the restaurant in a structured and standardized format with essential information within one glance. 
+- Only key information such as address and website is reflected to prevent overcrowding of the home page. 
+- Information about each restaurant can be easily retrieved by clicking on the image of the restaurant or the “View More” button. 
+- Upon hovering of the mouse over the buttons, the buttons will be highlighted. 
+    - Blue is used as a neutral colour to indicate update. 
+    - Red is used for delete to ensure that users do not click on the button. 
+- Consistent background and orange background is consistent across all the webpages.
 
 ## Technologies Used
 The following programming languages and tools were used to build the website:
@@ -28,12 +49,11 @@ The following programming languages and tools were used to build the website:
 * JavaScript 
 * Bootstrap v4.4 toolkit to organize the elements in the page
 * jQuery library for DOM manipulation
-* COVID-19 APIs for retrieving up-to-date data
-* Leaflet for map display and interactions
-* Bing Maps API for map layers
-* Visual Studio Code for the writing of codes
+* Python 
+* Flask
+* Gitpod for the writing of codes and testing of website
+* Mongodb Atlas for the hosting of database
 * W3C Markup Validation Service for HTML and CSS validation
-* Esprima for JavaScript Syntax Validator
 * GitHub
 
 ## Testing
