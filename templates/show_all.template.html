@@ -21,7 +21,6 @@
         <input id='search' class="form-control mr-sm-2" type="search" placeholder="Find a restaurant!" aria-label="Search" name='search'/>
         <input class="btn btn-outline-light my-2 my-sm-0" type="submit" value='Search'/>
     </form>
-    <span id='searchResult' style="display:none;"><em>Your search of "<u>{{search_result}}</u>" returned <u>{{search_count}}</u> result(s)</em></span>
 </div>
 
 {%endblock%}
@@ -32,6 +31,10 @@
     <h5>All you need to know about your restaurants and foods.</h5>
     <h5>By foodies, for foodies!</h5>
     <a href='{{url_for('create_new')}}' class='btn btn-lg btn-light'>Add a new restaurant!</a>
+</div>
+<div class="text-center mt-3">
+    <h4 id='searchResult' style="display:none;"><em>Your search of "<u>{{search_result}}</u>" returned <u>{{search_count}}</u> result(s)</em></h4>  
+    <a href="{{url_for('show_all')}}" id='backButton' class='btn btn-lg btn-secondary mt-3' style='display:none;' >Back to main page</a>
 </div>
 <div class="card-columns">
     {%for restaurant in all_restaurants%}
@@ -60,12 +63,14 @@
 
 {%block js%}
 <script>
-var searchResult="{{search_result}}"
+var searchResult="{{search_result}}";
     if ((searchResult != "") && (searchResult != null)){
-        document.querySelector('#searchResult').style.display="block"
+        document.querySelector('#searchResult').style.display="block";
+        document.querySelector('#backButton').style.display="block";
     }
     else{
-        document.querySelector('#searchResult').style.display="none"
+        document.querySelector('#searchResult').style.display="none";
+        document.querySelector('#backButton').style.display="none";
     }
 </script>
 {%endblock%}

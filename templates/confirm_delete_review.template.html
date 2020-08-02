@@ -9,7 +9,8 @@
 {%block content%}
 <h2>Delete Review?</h2>
 <div class='alert alert-danger'>
-<h5><span>Warning!</span>This action cannot be undone.</h5>
+<h5>Warning! This action cannot be undone.</h5>
+<h6>Are you sure?</h6>
     <form method='POST'>
         <input type='submit' value='Confirm' class='btn btn-danger'/>
         <a href='{{url_for('show_all')}}' class='btn btn-secondary'>Cancel</a>
