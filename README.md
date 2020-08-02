@@ -53,6 +53,7 @@ The webpage has the following features:
 - Ranking of each of the restaurants based on the star system in order
 - Creation of advertising space for restaurants who would like to be featured
 - A points system for users based on the number of reviews to earn perks in the future
+- To provide an advanced filtering of restaurants according to the type of cuisines, halal certified restaurants, etc.
 
 ## Technologies Used
 The following programming languages and tools were used to build the website:
@@ -107,6 +108,8 @@ The website has been tested for viewing and responsiveness on various screen siz
 
 ## Deployment
 The website is deployed on Heroku, using GitHub to host the project repository. The website can be found at this [link](http://foodiereview.herokuapp.com).
+- Database passwords and session keys are stored in the .env file which is included in the .gitignore.
+
 
 ## Credits
 This website was built using tools and data from various sources, including but not limited to the following:
