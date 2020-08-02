@@ -120,4 +120,6 @@ This website was built using tools and data from various sources, including but 
 
 - [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) for the hosting and storage of database.
 
+- Sample data images from [eatbook.sg](https://eatbook.sg)
+
 Last but not least, to [Trent Global](https://www.trentglobal.edu.sg/diplomainsoftwaredevelopment/?gclid=EAIaIQobChMI8M3ezf6t6QIV2BwrCh2R6A44EAAYASAAEgL6__D_BwE) and [Code Institute](https://codeinstitute.net) for the teachings and support to have made this project possible. 
