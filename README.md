@@ -35,12 +35,15 @@ Users are directed back the home page if there are no reviews for the restaurant
 The webpage has the following features:
 
 - The home page layout displays the image of the restaurant in a structured and standardized format with essential information within one glance. 
+    - The restaurants are displayed as cards in a masonry layout for a modern and clean look.
 - Only key information such as address and website is reflected to prevent overcrowding of the home page. 
 - Information about each restaurant can be easily retrieved by clicking on the image of the restaurant or the “View More” button. 
 - Upon hovering of the mouse over the buttons, the buttons will be highlighted. 
     - Blue is used as a neutral colour to indicate update. 
     - Red is used for delete to ensure that users do not click on the button. 
-- Consistent background and orange background is consistent across all the webpages.
+    - Green is used for addititional information.
+    - Dark grey is to indicate navigating backwards.
+- Consistent background and orange background is consistent across all the webpages, as orange gives off a vibrant and energetic mood which synergizes with the idea of food.
 
 ## Technologies Used
 The following programming languages and tools were used to build the website:
@@ -81,7 +84,7 @@ The website has been tested for viewing and responsiveness on various screen siz
 - JavaScript Syntax validated by Esprima
 
 ## Deployment
-GitHub was used to hose to deploy the website, using GitHub to host the project repository. You can find the deployed website in this [link](http://zuanming.github.io/secondrepo). 
+The website is deployed on Heroku, using GitHub to host the project repository. The website can be found at this [link](http://foodiereview.herokuapp.com).
 
 ## Credits
 This website was built using tools and data from various sources, including but not limited to the following:
