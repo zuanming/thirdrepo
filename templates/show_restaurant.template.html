@@ -25,7 +25,7 @@
 </div>
 
 <h3>Reviews</h3>
-<a href='{{url_for('create_review', id = restaurant._id)}}' class='btn btn-secondary mb-3'>New Review</a>
+<a href='{{url_for('create_review', id = restaurant._id)}}' class='btn btn-light mb-3'>New Review</a>
 <ul class='list-group'>
 	{%for review in restaurant.reviews %}
 	<li class="list-group-item">
