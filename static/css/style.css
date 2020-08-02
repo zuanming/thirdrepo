@@ -34,7 +34,7 @@ body {
       rgba(255, 255, 255, 0.8),
       rgba(252, 175, 88, 0.9)
     ),
-    url("/static/images/background_image.jpg");
+    url("https://res.cloudinary.com/dhktrng6p/image/upload/v1596358673/background_image_n1wknm.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
